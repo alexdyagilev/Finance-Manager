@@ -1,0 +1,140 @@
+
+h1 {
+	text-align: center;
+	background-color: green;
+	color: white;
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+}
+
+p {
+	font-size: 16px;
+}
+
+#bank-total, #cash-total {
+	color: white;
+}
+
+.cardD-text {
+	font-size: 25px;
+}
+
+#cardD-input {
+	width: 120px;
+}
+
+#new-tr-title {
+	text-align: center;
+	background-color: green;
+	color: white;
+	border-width: 0px;
+}
+
+.panel-heading {
+	background-color: green !important;
+	border-color: black !important;
+	border-width: 3px;
+}
+
+.panel-body {
+	text-align: center;
+}
+
+.panel-default {
+	border-color: black;
+	border-width: 3px;
+}
+
+#main-text {
+	text-align: center;
+	background-color: #073f0b;
+	color: white;
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+}
+
+#new-bank {
+	text-align: center;
+	width: 555px;
+}
+
+#new-cash {
+	text-align: center;
+	width: 555px;
+}
+
+#submit-main {
+	text-align: center;
+	background-color: #073f0b;
+	color: white;
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+}
+
+h2 {
+	color: black;
+	font-family: 'Baloo', cursive;
+	text-align: center;
+	text-shadow: 5px 5px white;
+}
+
+.main-prompt {
+	color: white;
+	background-color: #0d6337;
+	font-family: 'Baloo', cursive;
+	text-align: center;
+	text-shadow: 0px 0px white;
+}
+
+h4 {
+	text-align: center;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+
+button {
+	background-color: green;
+    color: white;
+    border: none;
+}
+
+.col-md-12 {
+	text-align: center;
+}
+
+body {
+	background-image: url("../img/finance-bg.jpg");
+	background-size: cover;
+}
+
+.jumbotron { 
+	text-align: center;
+	border-style: solid;
+	border-width: 5px;
+	/*background-image: url("../img/cyan-bg.jpg");*/
+	background-image: url("../img/jumbotron-bg.png");
+	background-size: cover;
+}
+
+li {
+	text-align: center;
+}
+
+.navbar {
+	background-color: green;
+	border-color: black !important;
+	height: 60px;
+}
+
+#current-user {
+	color: white;
+	font-family: 'Baloo', cursive;
+	text-align: center;
+	text-shadow: 5px 5px black;
+}

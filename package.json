@@ -1,0 +1,40 @@
+{
+  "name": "finance_manager",
+  "version": "1.0.0",
+  "description": "App that helps people monitor their finances over time.",
+  "main": "public/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexdyagilev/Finance-Manager.git"
+  },
+  "keywords": [
+    "finance",
+    "manager",
+    "spending",
+    "charts",
+    "graphs"
+  ],
+  "author": "Alex Dyagilev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexdyagilev/Finance-Manager/issues"
+  },
+  "homepage": "https://github.com/alexdyagilev/Finance-Manager#readme",
+  "dependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.1",
+    "mongoose-seed": "^0.3.2",
+    "morgan": "^1.8.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^1.13.1"
+  }
+}

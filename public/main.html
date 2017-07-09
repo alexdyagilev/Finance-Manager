@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Finance Manager - Main</title>
+		<!--Bootstrap layout link-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!--Google fonts links-->
+		<link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+		<!--Link to Moment.js-->
+		<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+		<!--Calendar plugin-->
+		<link rel="stylesheet" href="assets/css/monthly.css">
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script type="text/javascript" src="assets/js/monthly.js"></script>
+		<!--My CSS Stylesheet link-->
+		<link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+		<!--My JS file-->
+		<script type="text/javascript" src="./assets/js/main.js"></script>
+		
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<h2 id="current-user">Username</h2>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li><h3 id="bank-total">Current Bank Total : </h3></li>
+						<li><h3>|</h3></li>
+						<li><h3 id="cash-total">Current Cash Total : </h3></li>
+						<li><h3>|</h3></li>
+						<li><h3><button type="button" data-toggle="modal" data-target="#calculator">Calculator</button></h3></li>
+						<li><h3>|</h3></li>
+						<li><h3><button onclick="window.location.href='./index.html'">Log Out</button></h3></li>
+					</ul>
+					</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<h1><button id="new-tr-btn">New Transaction</button></h1>
+						</div>
+						<div class="col-md-2">
+							<h1><button id="calendar-btn" gldp-id="mydate">Calendar</h1></button>
+						</div>
+						<div class="col-md-3">
+							<h1><button id="history-btn">History</h1></button>
+						</div>
+						<div class="col-md-3">
+							<h1><button id="graphs-btn">Graphs</h1></button>
+						</div>
+					</div>
+					<div class="row" id="main-row">
+						<div class="col-md-3"></div>
+						<div class="col-md-6" id="main-info">
+							<h1 id="main-text">Welcome to Finance Manager. Please select one of the available options above.</h1>
+						</div>
+						<div class="col-md-3"></div>
+						<!-- <div class="row">
+							<div class="col-md-12">
+								<h1>APP</h1>
+								<div id="app"></div>
+								<script src="bundle.js"></script>
+							</div>
+						</div>
+ -->					</div>
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="calculator" role="dialog">
+					<div class="modal-dialog">
+						
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Calculator</h4>
+							</div>
+							<div class="modal-body">
+								<FORM NAME="Calc">
+									<TABLE BORDER=5>
+										<TR>
+											<TD>
+												<INPUT TYPE="text"   NAME="Input" Size="20">
+												<br>
+											</TD>
+										</TR>
+										<TR>
+											<TD>
+												<INPUT TYPE="button" NAME="one"   VALUE="  1  " OnClick="Calc.Input.value += '1'">
+												<INPUT TYPE="button" NAME="two"   VALUE="  2  " OnCLick="Calc.Input.value += '2'">
+												<INPUT TYPE="button" NAME="three" VALUE="  3  " OnClick="Calc.Input.value += '3'">
+												<INPUT TYPE="button" NAME="plus"  VALUE="  +  " OnClick="Calc.Input.value += ' + '">
+												<br>
+												<INPUT TYPE="button" NAME="four"  VALUE="  4  " OnClick="Calc.Input.value += '4'">
+												<INPUT TYPE="button" NAME="five"  VALUE="  5  " OnCLick="Calc.Input.value += '5'">
+												<INPUT TYPE="button" NAME="six"   VALUE="  6  " OnClick="Calc.Input.value += '6'">
+												<INPUT TYPE="button" NAME="minus" VALUE="  -  " OnClick="Calc.Input.value += ' - '">
+												<br>
+												<INPUT TYPE="button" NAME="seven" VALUE="  7  " OnClick="Calc.Input.value += '7'">
+												<INPUT TYPE="button" NAME="eight" VALUE="  8  " OnCLick="Calc.Input.value += '8'">
+												<INPUT TYPE="button" NAME="nine"  VALUE="  9  " OnClick="Calc.Input.value += '9'">
+												<INPUT TYPE="button" NAME="times" VALUE="  x  " OnClick="Calc.Input.value += ' * '">
+												<br>
+												<INPUT TYPE="button" NAME="clear" VALUE="  c  " OnClick="Calc.Input.value = ''">
+												<INPUT TYPE="button" NAME="zero"  VALUE="  0  " OnClick="Calc.Input.value += '0'">
+												<INPUT TYPE="button" NAME="DoIt"  VALUE="  =  " OnClick="Calc.Input.value = eval(Calc.Input.value)">
+												<INPUT TYPE="button" NAME="div"   VALUE="  /  " OnClick="Calc.Input.value += ' / '">
+												<br>
+											</TD>
+										</TR>
+									</TABLE>
+								</FORM>
+							</div>
+							<div class="modal-footer">
+								<button type="button" id="m-c" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+				</body>
+			</html>
+
