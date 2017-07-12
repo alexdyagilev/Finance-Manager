@@ -15,11 +15,11 @@ var AccountSchema = new Schema({
   },
   bankAmount: {
     type: Number,
-    required: true
+    default: 0
   },
   cashAmount: {
     type: Number,
-    required: true
+    default: 0
   }
 },
 {collection: 'accounts'}

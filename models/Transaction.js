@@ -1,11 +1,13 @@
 // Require mongoose
 var mongoose = require("mongoose");
+var moment = require("moment");
 // Create a schema class
 var Schema = mongoose.Schema;
 
+var current = moment().format("l");
 // Create the transaction schema
 var TransactionSchema = new Schema({
-  type: {
+  cardOrCash: {
     type: String
   },
   description: {
@@ -16,7 +18,7 @@ var TransactionSchema = new Schema({
   },
   date: { 
   	type: Date, 
-  	default: Date.now 
+  	default: current
   }
 });
 

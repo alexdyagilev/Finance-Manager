@@ -29,11 +29,13 @@
 		<div class="col-md-3"></div>
         <div class="col-md-6">
             <ul>
-                <li><h2>Username: <input type="text" name="username" id="username"></h2></li>
-                <li><h2>Password: <input type="password" name="password"></h2></li>
+            <form action="/submit" method="post">
+                <li><h2>Username: <input type="text" name="username" id="username" placeholder="username"></h2></li>
+                <li><h2>Password: <input type="password" name="password" placeholder="password"></h2></li>
                 <li><a href="./main.html" onclick="newAccount();"><img src="./assets/img/continue.png"></a></li>
                 <li><a href="./index.html"><img src="./assets/img/back.png"></a></li>
                 </li>
+            </form>
             </ul>
             </table>
         </div>
