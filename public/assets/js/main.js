@@ -117,6 +117,3 @@ function trFinish(){
 
 
 };
-
-
-// <h3>Spent on:</h3><p><input type='radio' id='bills-radio' name='tr-category'> Bills <input type='radio' id='food-radio' name='tr-category'> Food <input type='radio' id='ent-radio' name='tr-category'> Entertainment <input type='radio' id='other-radio' name='tr-category'> Other</p></div></div>

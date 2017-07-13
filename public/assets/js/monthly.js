@@ -9,7 +9,7 @@ Monthly 2.2.1 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 			// These are overridden by options declared in footer
 			var defaults = {
-				dataType: "xml",
+				dataType: "json",
 				disablePast: false,
 				eventList: true,
 				events: "",
