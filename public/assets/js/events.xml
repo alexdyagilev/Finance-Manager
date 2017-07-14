@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<monthly>
+
+    <event>
+        <id>1</id>
+        <name>Event Name</name>
+        <startdate>2017-07-10</startdate>
+        <enddate></enddate> <!-- optional -->
+        <starttime></starttime> <!-- optional (military time) -->
+        <endtime></endtime> <!-- optional (military time) -->
+        <color>#ffb128</color> <!-- optional -->
+        <url></url> <!-- optional -->
+    </event>
+
+</monthly>

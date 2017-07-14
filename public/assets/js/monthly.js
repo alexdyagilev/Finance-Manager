@@ -13,7 +13,7 @@ Monthly 2.2.1 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				disablePast: false,
 				eventList: true,
 				events: "",
-				jsonUrl: "",
+				jsonUrl: "../../../events.json",
 				linkCalendarToEventUrl: false,
 				maxWidth: false,
 				mode: "event",
@@ -24,7 +24,7 @@ Monthly 2.2.1 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				target: "",
 				useIsoDateFormat: false,
 				weekStart: 0,	// Sunday
-				xmlUrl: ""
+				xmlUrl: "events.xml"
 			};
 
 			var	options = $.extend(defaults, customOptions),

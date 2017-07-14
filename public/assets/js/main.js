@@ -1,6 +1,13 @@
 
 $(document).ready(function(){
 
+var current = new Date();
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+var current2 = monthNames[(current.getMonth())] + ' ' + current.getDate();
+console.log("CURRENT: "+current2);
+console.log("CURRENT TYPE: "+typeof current2);
 
 
 	document.getElementById("current-user").innerHTML = localStorage.getItem("username");
@@ -42,7 +49,11 @@ $(document).ready(function(){
 		$("#sort-area").html("");
 		localStorage.setItem("history-click",1);
 		$('#main-info').html("");
-        $('#main-info').monthly();
+        $('#main-info').monthly({
+    			mode: 'event',
+    			dataType: 'json',
+    			xmlUrl: 'events.json'
+		});
 	});
 
 	$("#history-btn").click(function(){

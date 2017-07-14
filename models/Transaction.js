@@ -4,7 +4,11 @@ var moment = require("moment");
 // Create a schema class
 var Schema = mongoose.Schema;
 
-var current = moment().format("l");
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+var current = monthNames[(new Date().getMonth())] + ' ' + new Date().getDate();
+
 // Create the transaction schema
 var TransactionSchema = new Schema({
   cardOrCash: {
@@ -17,7 +21,7 @@ var TransactionSchema = new Schema({
     type: Number
   },
   date: { 
-  	type: Date, 
+  	type: String, 
   	default: current
   }
 });
