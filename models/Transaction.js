@@ -23,6 +23,9 @@ var TransactionSchema = new Schema({
   date: { 
   	type: String, 
   	default: current
+  },
+  category: {
+    type: String
   }
 });
 

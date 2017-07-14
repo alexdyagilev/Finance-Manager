@@ -99,29 +99,37 @@ db.once("open", function() {
 //   }
 // });
 
+app.post("/newaccount", function(){
+  var newA = new Account(req.body);
+  newA.save();
+});
+
+var AllT = new AllTransactions();
+
 app.post("/submit", function(req, res) {
 
   var newT = new Transaction(req.body);
 
 // Save the new transaction in the transaction collection
-  newT.save(function(err, doc) {
-    // Send an error to the browser if there's something wrong
-    if (err) {
-      res.send(err);
-    }
-    else {
-      AllTransactions.findOneAndUpdate({}, { $push: { "changes": doc._id } }, { new: true }, function(error, doc) {
-        // Send any errors to the browser
-        if (error) {
-          res.send(error);
-        }
-        // Or send the doc to the browser
-        else {
-          res.send(doc);
-        }
-      });
-    }
-  });
+  newT.save();
+  // newT.save(function(err, doc) {
+  //   // Send an error to the browser if there's something wrong
+  //   if (err) {
+  //     res.send(err);
+  //   }
+  //   else {
+  //     AllTransactions.findOneAndUpdate({}, { $push: { "changes": doc._id } }, { new: true }, function(error, doc) {
+  //       // Send any errors to the browser
+  //       if (error) {
+  //         res.send(error);
+  //       }
+  //       // Or send the doc to the browser
+  //       else {
+  //         res.send(doc);
+  //       }
+  //     });
+  //   }
+  // });
 });
 
 app.get("/data", function(req, res) {

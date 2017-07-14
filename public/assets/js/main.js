@@ -1,6 +1,33 @@
 
 $(document).ready(function(){
 
+// var username = $("username").val().trim();
+//Create a new account - posts account data
+function newAccount(){
+	var newLogin = 1;
+	localStorage.setItem("new-account",newLogin);
+	console.log("new: " + newLogin);
+	var username = $("#username").val().trim(); 
+	var username = $("#password").val().trim();
+
+	$.ajax({
+		url: "/newaccount",
+		method: "POST",
+		data: {
+			username: $('#cardOrCash').val(),
+			password: $('#description').val(),
+			bankAmount: $('#amount-input').val(),
+			cashAmount: $('#date-input').val()
+			},
+		success: function(){
+			// console.log("DATA POSTED!");
+			},
+		error: function(err){
+			return err;
+			}
+		});
+}
+
 var current = new Date();
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -13,7 +40,7 @@ console.log("CURRENT TYPE: "+typeof current2);
 	document.getElementById("current-user").innerHTML = localStorage.getItem("username");
 
     if (localStorage.getItem("new-account") == 1 && localStorage.getItem("current-bank") == 0){
-		$("#main-info").html("<h1>Welcome to Finance Manager! To start, please set your bank and cash totals.</h1><h2 class='main-prompt'>Bank Total: </h2><h2><input type='text' id='new-bank'></h2><br><h2 class='main-prompt'>Cash Total: </h2><h2><input type='text' id='new-cash'></h2><h2 class='main-prompt' id='submit-main'><button>Submit</button></h2>");
+		$("#main-info").html("<h1>Welcome to Finance Manager! To start, please set your bank and cash totals.</h1><h2 class='main-prompt'>Bank Total: </h2><h2><input type='text' id='new-bank'></h2><br><h2 class='main-prompt'>Cash Total: </h2><h2><input type='text' id='new-cash'></h2><h2 class='main-prompt' id='submit-main'><button onclick='newAccount();'>Submit</button></h2>");
 	}
 	else if(localStorage.getItem("history")==0){
 		$("#main-info").html("<h1>Your bank and cash values have been set. Use the links above to navigate and use the features.</h1>");
@@ -71,16 +98,16 @@ function trNext(){
 		localStorage.setItem("trStepOne",trStepOne);
 		switch(trStepOne) {
 			case "cardD":
-				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Card Deposit</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Card Deposit'><h3>Description: <input type='text' id='description'></h3><p class='cardD-text'>Amount: $ <input type='text' id='amount-input'></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
+				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Card Deposit</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Card Deposit'><p>Description: <input type='text' id='description'></p><p class='cardD-text'>Amount: $ <input type='text' id='amount-input'></p><p class='cardD-date'>Date (e.g. Jul 14): $ <input type='text' id='date-input'></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
 				break;
 			case "cardW":
-				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Card Withdrawal</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Card Withdrawal'><h3>Description: <input type='text' id='description'></h3><p class='cardW-text'>Amount: $ <input type='text' id='amount-input'></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
+				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Card Withdrawal</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Card Withdrawal'><h3>Description: <input type='text' id='description'></h3><p class='cardW-text'>Amount: $ <input type='text' id='amount-input'></p><p class='cardW-date'>Date (e.g. Jul 14): $ <input type='text' id='date-input'></p><p>Category: <select id='category'>	<option value=''></option><option value='Food'>Food</option><option value='Entertainment'>Entertainment</option><option value='Bills'>Bills</option><option value='Gas'>Gas</option><option value='Other'>Other</option></select></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
 				break;
 			case "cashD":
-				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Add Cash</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Add Cash'><h3>Description: <input type='text' id='description'></h3><p class='cashD-text'>Amount: $ <input type='text' id='amount-input'></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
+				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Add Cash</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Add Cash'><h3>Description: <input type='text' id='description'></h3><p class='cashD-text'>Amount: $ <input type='text' id='amount-input'></p><p class='cashD-date'>Date (e.g. Jul 14): $ <input type='text' id='date-input'></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
 				break;
 			case "cashW":
-				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Subtract Cash</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Subtract Cash'><h3>Description: <input type='text' id='description'></h3><p class='cashW-text'>Amount: $ <input type='text' id='amount-input'></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
+				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Subtract Cash</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Subtract Cash'><h3>Description: <input type='text' id='description'></h3><p class='cashW-text'>Amount: $ <input type='text' id='amount-input'></p><p class='cashW-date'>Date (e.g. Jul 14): $ <input type='text' id='date-input'></p><p>Category: <select id='category'>	<option value=''></option><option value='Food'>Food</option><option value='Entertainment'>Entertainment</option><option value='Bills'>Bills</option><option value='Gas'>Gas</option><option value='Other'>Other</option></select></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
 				break;
 		} 
 
@@ -88,21 +115,90 @@ function trNext(){
 
 
 function trFinish(){
-	$.ajax({
+	var cat = $("#category :selected").text();
+	//IF Deposit is made - no category added to DB
+	if(($('#cardOrCash').val() == "Card Deposit") || ($('#cardOrCash').val() == "Add Cash")){
+		if($('#date-input').val() != ""){
+		$.ajax({
 		url: "/submit",
 		method: "POST",
 		data: {
 			cardOrCash: $('#cardOrCash').val(),
 			description: $('#description').val(),
-			amount: $('#amount-input').val()
+			amount: $('#amount-input').val(),
+			date: $('#date-input').val(),
+			category: cat
 			},
 		success: function(){
-			console.log("DATA POSTED!");
+			// console.log("DATA POSTED!");
 			},
 		error: function(err){
 			return err;
 			}
 		});
+	}
+	else{
+		$.ajax({
+		url: "/submit",
+		method: "POST",
+		data: {
+			cardOrCash: $('#cardOrCash').val(),
+			description: $('#description').val(),
+			amount: $('#amount-input').val(),
+			category: cat
+			},
+		success: function(){
+			// console.log("DATA POSTED!");
+			},
+		error: function(err){
+			return err;
+			}
+		});
+	}
+	}
+	//OTHERWISE (Withdrawal) - adds category to DB
+	else {
+		//IF date specified
+		if($('#date-input').val() != ""){
+		$.ajax({
+		url: "/submit",
+		method: "POST",
+		data: {
+			cardOrCash: $('#cardOrCash').val(),
+			description: $('#description').val(),
+			amount: $('#amount-input').val(),
+			date: $('#date-input').val(),
+			category: cat
+			},
+		success: function(){
+			// console.log("DATA POSTED!");
+			},
+		error: function(err){
+			return err;
+			}
+		});
+	}
+	else{
+		//Date not specified
+		$.ajax({
+		url: "/submit",
+		method: "POST",
+		data: {
+			cardOrCash: $('#cardOrCash').val(),
+			description: $('#description').val(),
+			amount: $('#amount-input').val(),
+			category: cat
+			},
+		success: function(){
+			// console.log("DATA POSTED!");
+			},
+		error: function(err){
+			return err;
+			}
+		});
+	}
+	}
+	
 
 	var trStepOne = localStorage.getItem("trStepOne");
 	console.log("trFinish!");
