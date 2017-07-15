@@ -95,7 +95,7 @@ $.get("/data", function(data){ //GET START
             count = 0;
             addAmount = 0;
             var day = new Date(new Date().setDate(new Date().getDate() - (i-1)));
-            var dayFormat = monthNames[(day.getMonth())] + ' ' + day.getDate();
+            var dayFormat = monthNames[(day.getMonth())] + ' ' + day.getDate() + ' ' + day.getYear();
             //2nd for loop for data (loops through transaction database)
             for(k = 0; k < size; k++){
                 //If Total Spent is selected

@@ -150,8 +150,8 @@ app.get("/data", function(req, res) {
 app.listen(3000, function() {
   console.log("App running on port 3000!");
 
-  Transaction.find({}, function(err, data){
-        console.log(">>>> " + data[0].amount );
+  // Transaction.find({}, function(err, data){
+  //       console.log(">>>> " + data[0].amount );
 
 //         seeder.connect('mongodb://localhost/financemanager', function() {
  
@@ -168,4 +168,4 @@ app.listen(3000, function() {
 //     });
 // });
 });
-});
+// });

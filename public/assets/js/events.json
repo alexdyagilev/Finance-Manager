@@ -3,8 +3,8 @@
     {
       "id": 1,
       "name": "This is a JSON event",
-      "startdate": "2017-7-10",
-      "enddate": "2017-7-10",
+      "startdate": "2017-07-10",
+      "enddate": "2017-07-10",
       "starttime": "12:00",
       "endtime": "2:00",
       "color": "#FFB128",
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "name": "This is a JSON event",
-      "startdate": "2016-10-15",
+      "startdate": "2017-07-15",
       "enddate": "",
       "starttime": "12:00",
       "endtime": "2:00",
