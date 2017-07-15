@@ -1,47 +1,46 @@
+<!--
+FINANCIAL MANAGER v1.0
+by Alex Dyagilev
+create_account.html - Create New Account
+-->
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Create an account</title>
-
-    <!--Bootstrap layout link-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!--Google fonts links-->
-    <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
-
-    <!--Link to Moment.js-->
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    
-    <!--My CSS Stylesheet link-->
-    <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
-    <script type="text/javascript" src="./assets/js/logic.js"></script>
-
-</head>
-<body>
-	<div class="container">
-		<div class="jumbotron">
-			<img src="./assets/img/create-account.png">
-		</div>
-		<br>
-		<br>
-		<div class="col-md-3"></div>
-        <div class="col-md-6">
-            <ul>
-            <form action="/submit" method="post">
-                <li><h2>Username: <input type="text" name="username" id="username" placeholder="username"></h2></li>
-                <li><h2>Password: <input type="password" name="password" id="password" placeholder="password"></h2></li>
-                <li><a href="./main.html"><img src="./assets/img/continue.png"></a></li>
-                <li><a href="./index.html"><img src="./assets/img/back.png"></a></li>
-                </li>
-            </form>
-            </ul>
-            </table>
-        </div>
+    <head>
+        <title>Create an account</title>
+        <!--Bootstrap layout link-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Google fonts links-->
+        <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+        <!--Link to Moment.js-->
+        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
         
-        <div class="col-md-3"></div>
-	</div>
-
+        <!--My CSS Stylesheet link-->
+        <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+        <script type="text/javascript" src="./assets/js/logic.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <img src="./assets/img/create-account.png">
+            </div>
+            <br>
+            <br>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <ul>
+                    <form action="/submit" method="post">
+                        <li><h2>Username: <input type="text" name="username" id="username" placeholder="username"></h2></li>
+                        <li><h2>Password: <input type="password" name="password" id="password" placeholder="password"></h2></li>
+                        <li><a href="./main.html"><img src="./assets/img/continue.png"></a></li>
+                        <li><a href="./index.html"><img src="./assets/img/back.png"></a></li>
+                    </li>
+                </form>
+            </ul>
+        </table>
+    </div>
+    <div class="col-md-3"></div>
+</div>
 </body>
 </html>

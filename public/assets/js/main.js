@@ -1,17 +1,23 @@
+// ------------------------------------------------------------------------------
+//                FINANCIAL MANAGER v1.0
+// ------------------------------------------------------------------------------
+//                  by Alex Dyagilev
+// ------------------------------------------------------------------------------
+//                      main.js -- most of JS for app
+// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 $(document).ready(function(){
-
-	$("#current-user").html(localStorage.getItem('username'));
-
-	$("#new-tr-btn").click(function(){
+	$("#current-user").html("" + localStorage.getItem("username")); //Username in top left
+	$("#new-tr-btn").click(function(){ //START New Transaction
 		$('#main-info').html("");
 		$("#chart").html("");
 		$("#sort-area").html("");
 		localStorage.setItem("histSelect","");
 		$("#main-info").html("<br><div class='panel panel-default'>			<div class='panel-heading'><h1 id='new-tr-title'><strong>Add New Transaction</strong></h1></div><div class='panel-body'><h3>Type of Transaction:</h3><form><p><input type='radio' id='card-d' name='new-tr-1' value='cardD'> Card Deposit <input type='radio' id='card-w' name='new-tr-1' value='cardW'> Card Withdrawal <br><br><input type='radio' id='cash-d' name='new-tr-1' value='cashD'> Add Cash <input type='radio' id='cash-w' name='new-tr-1' value='cashW'> Subtract Cash </p></form><h3><button onclick='trNext();' id='tr-btn-1'>Next</button></h3>");
-	});
+	}); //END New Transaction
 
-var events = {
+var events = { //Starts the events JSON for Calendar
 	"monthly": [
     {
       "id": 0,
@@ -21,17 +27,19 @@ var events = {
     }
     ]
 };
-var cardWColor = "#2dc7ff";
-var cardDColor = "#2d7eff";
-var cashWColor = "#4cc956";
-var cashDColor = "#0e8210";
-color = "";
+
+var cardWColor = "#2dc7ff"; //Sets color for card withdrawal
+var cardDColor = "#2d7eff"; //Sets color for card deposit
+var cashWColor = "#4cc956"; //Sets color for cash withdrawal
+var cashDColor = "#0e8210"; //Sets color for cash deposit
+color = ""; //Calendar event color
+
 	$("#calendar-btn").click(function(){ //START Calendar Button onclick
 		$("#chart").html("");
 		$("#sort-area").html("");
 		$('#main-info').html("");
-		localStorage.setItem("histSelect","");
-		$.get("/data", function(data){
+		localStorage.setItem("histSelect",""); //RESETS History selector
+		$.get("/data", function(data){ //START Calendar GET DATA
 			var element = {};
 			var size = Object.keys(data).length;
 			var newDate = "";
@@ -79,12 +87,20 @@ color = "";
 				events.monthly.push(element);
 			} //END Calendar loop
 			Calendar();
-		});
-		
-        
+		}); //END Calendar GET DATA
+		events = { //RESETS events after Calendar is displayed (to prevent doubling data)
+			"monthly": [
+    			{
+      				"id": 0,
+			        "name": "",
+      				"startdate": "2017-01-01",
+      				"color": "#FFB128"
+    			}
+    					]
+		};
 	}); //END Calendar Button onclick
 
-	function Calendar(){
+	function Calendar(){ //Draws the Calendar on page
 		$('#main-info').monthly({
     			mode: 'event',
     			dataType: 'json',
@@ -92,15 +108,13 @@ color = "";
 		});
 	};
 
-localStorage.setItem("histSelect","");
+localStorage.setItem("histSelect",""); //RESETS History selector
 
 	$("#history-btn").click(function(){ //START History button
 		console.log("HS: "+localStorage.getItem("histSelect"));
 		$("#chart").html("");
 		$("#sort-area").html("");
 		var all = "";
-		// localStorage.setItem("history",1)
-		// location.reload();
 		$.get("/data", function(data){ //GET START
 			var size = Object.keys(data).length;
 			var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -154,26 +168,22 @@ localStorage.setItem("histSelect","");
         } //END IF This Year selected
 			$('#main-info').html("<div='container'><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Transaction History</strong></h1></div><div class='panel-heading' id='hist-2'><div class='row'><div class='col-md-2'><h4><strong>Show: </strong></h4></div><div class='col-md-8'><input type='radio' id='last30' name='show-radio' value='last30'><strong> Last 30 Days <input type='radio' id='thisyearsofar' name='show-radio' value='thisyearsofar'> This Year So Far </strong></div><div class='col-md-2'><button onclick='historyGo();'><h4>Go!</h4></button></div></div></div>" + all);
 		}); //GET END
-		
-
 	}); //END History button
 }); //END DOC READY
 
-function days_passed(dt) {
+function days_passed(dt) { //Returns the current # day of the year
   var current = new Date(dt.getTime());
   var previous = new Date(dt.getFullYear(), 0, 1);
-
   return Math.ceil((current - previous + 1) / 86400000);
 }
 
-function historyGo(){
+function historyGo(){ //Uses History Selection to draw History on page
 		localStorage.setItem("histSelect",$('input[name=show-radio]:checked').val());
 		$("#main-info").html("");
 		$("#history-btn").click();
 	};
 
-function trNext(){
-	
+function trNext(){ //Called after clicking NEXT for New Transaction
 		var trStepOne = $('input[name=new-tr-1]:checked').val();
 		localStorage.setItem("trStepOne",trStepOne);
 		switch(trStepOne) {
@@ -190,13 +200,12 @@ function trNext(){
 				$("#main-info").html("<div><br><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Subtract Cash</strong></h1></div><div class='panel-body'><input type='text' id='cardOrCash' hidden value='Subtract Cash'><h3>Description: <input type='text' id='description'></h3><p class='cashW-text'>Amount: $ <input type='text' id='amount-input'></p><p class='cashW-date'>Date (e.g. Jul 14 2017): $ <input type='text' id='date-input'></p><p>Category: <select id='category'>	<option value=''></option><option value='Food'>Food</option><option value='Entertainment'>Entertainment</option><option value='Bills'>Bills</option><option value='Gas'>Gas</option><option value='Other'>Other</option></select></p><h3><button id='tr-btn-2' onclick='trFinish();'>Finish</button></h3></div>");
 				break;
 		} 
+}; //END function trNext
 
-};
 
-
-function trFinish(){
+function trFinish(){ //Called after clicking FINISH for New Transaction
 	var cat = $("#category :selected").text();
-	//IF Deposit is made - no category added to DB
+	//IF Deposit is made --> no category added to DB -AND- Date specified 
 	if(($('#cardOrCash').val() == "Card Deposit") || ($('#cardOrCash').val() == "Add Cash")){
 		if($('#date-input').val() != ""){
 		$.ajax({
@@ -217,7 +226,7 @@ function trFinish(){
 			}
 		});
 	}
-	else{
+	else{ //IF Deposit is made --> no category added to DB -AND- Date NOT specified 
 		$.ajax({
 		url: "/submit",
 		method: "POST",
@@ -235,10 +244,9 @@ function trFinish(){
 			}
 		});
 	}
-	}
-	//OTHERWISE (Withdrawal) - adds category to DB
+	} //END Deposit POSTs
 	else {
-		//IF date specified
+		//IF Withdrawal is made --> no category added to DB -AND- Date specified 
 		if($('#date-input').val() != ""){
 		$.ajax({
 		url: "/submit",
@@ -259,7 +267,7 @@ function trFinish(){
 		});
 	}
 	else{
-		//Date not specified
+		//IF Withdrawal is made --> no category added to DB -AND- Date NOT specified 
 		$.ajax({
 		url: "/submit",
 		method: "POST",
@@ -277,30 +285,26 @@ function trFinish(){
 			}
 		});
 	}
-	}
-	
+	} //END Withdrawal POSTs
 
-	var trStepOne = localStorage.getItem("trStepOne");
-	console.log("trFinish!");
+	var trStepOne = localStorage.getItem("trStepOne"); //What kind of transaction selected
 	console.log(trStepOne);
-	switch(trStepOne){
-		case "cardD":
+	switch(trStepOne){ //START SWITCH
+		case "cardD": //Card Deposit
 			var value = $('#amount-input').val();
 			$("#main-info").html("<br><div class='panel panel-default'><div class='panel-body'><h3>Added to Bank Balance:  $" + value + "</h3>");
 			break;
-		case "cardW":
+		case "cardW": //Card Withdrawal
 			var value = $('#amount-input').val();
 			$("#main-info").html("<br><div class='panel panel-default'><div class='panel-body'><h3>Subtracted from Bank Balance:  $" + value + "</h3>");
 			break;
-		case "cashD":
+		case "cashD": //Cash Deposit
 			var value = $('#amount-input').val();
 			$("#main-info").html("<br><div class='panel panel-default'><div class='panel-body'><h3>Cash Added:  $" + value + "</h3>");
 			break;
-		case "cashW":
+		case "cashW": //Cash Withdrawal
 			var value = $('#amount-input').val();
 			$("#main-info").html("<br><div class='panel panel-default'><div class='panel-body'><h3>Cash Subtracted:  $" + value + "</h3>");
 			break;
-	}
-
-
-};
+	} //END SWITCH
+}; //END function trFinish

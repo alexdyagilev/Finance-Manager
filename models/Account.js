@@ -1,3 +1,12 @@
+//------------------------------------------------------------------------------
+//                FINANCIAL MANAGER v1.0
+//------------------------------------------------------------------------------
+//                  by Alex Dyagilev
+//------------------------------------------------------------------------------
+//                      Account.js -- model for accounts
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
 // Require mongoose
 var mongoose = require("mongoose");
 // Create Schema class
@@ -12,14 +21,6 @@ var AccountSchema = new Schema({
   password: {
     type: String,
     required: true
-  },
-  bankAmount: {
-    type: Number,
-    default: 0
-  },
-  cashAmount: {
-    type: Number,
-    default: 0
   }
 });
 
