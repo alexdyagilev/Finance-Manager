@@ -38,10 +38,6 @@ p {
 	text-align: left;
 }
 
-#sorting-form {
-
-}
-
 .col-md-8 {
 	vertical-align: center;
 }
@@ -58,10 +54,9 @@ p {
 #sort-btn {
 	background-color: white;
 	color: #00660b;
-} 
+}
 
 #sorting-area {
-
 	text-align: center;
 	background-color: #00660b;
 	color: white;
@@ -71,7 +66,7 @@ p {
 }
 
 #chart {
-	background-color: white;
+	
 }
 
 #bank-total, #cash-total {
@@ -198,6 +193,13 @@ button {
     margin-top: -120%;
     opacity: 0;
     transition: all 0.8s
+}
+
+.main-btn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
 }
 
 .col-md-12 {

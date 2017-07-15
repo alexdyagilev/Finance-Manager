@@ -24,7 +24,7 @@ $("#chart-start").click(function(){ //START chart-start
         graph = "line";
     }
     label = localStorage.getItem("label");
-    $("#chart").html("<canvas id='myChart' width='400' height='140'></canvas>");
+    $("#chart").html("<canvas id='myChart' width='400' height='140' style='background-color: white;'></canvas>");
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, { //START Chart Setup
         type: graph,
