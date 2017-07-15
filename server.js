@@ -99,12 +99,14 @@ db.once("open", function() {
 //   }
 // });
 
-app.post("/newaccount", function(){
+app.post("/newaccount", function(req,res){
+
   var newA = new Account(req.body);
+  
   newA.save();
 });
 
-var AllT = new AllTransactions();
+// var AllT = new AllTransactions();
 
 app.post("/submit", function(req, res) {
 

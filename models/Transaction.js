@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
-var current = monthNames[(new Date().getMonth())] + ' ' + new Date().getDate() + ' ' + new Date().getYear();
+var current = monthNames[(new Date().getMonth())] + ' ' + new Date().getDate() + ' ' + (new Date().getYear() + 1900);
 
 // Create the transaction schema
 var TransactionSchema = new Schema({

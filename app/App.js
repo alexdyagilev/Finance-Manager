@@ -3,10 +3,10 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 
 // TransactionHistory Component
-var THistory = require("./components/THistory");
+var Main = require("./components/Main");
 
 
 
-ReactDOM.render(<THistory />, document.getElementById("app"));
+ReactDOM.render(<Main />, document.getElementById("main-info"));
 
 

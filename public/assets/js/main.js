@@ -1,63 +1,13 @@
 
 $(document).ready(function(){
 
-// var username = $("username").val().trim();
-//Create a new account - posts account data
-function newAccount(){
-	var newLogin = 1;
-	localStorage.setItem("new-account",newLogin);
-	console.log("new: " + newLogin);
-	var username = $("#username").val().trim(); 
-	var username = $("#password").val().trim();
-
-	$.ajax({
-		url: "/newaccount",
-		method: "POST",
-		data: {
-			username: $('#cardOrCash').val(),
-			password: $('#description').val(),
-			bankAmount: $('#amount-input').val(),
-			cashAmount: $('#date-input').val()
-			},
-		success: function(){
-			// console.log("DATA POSTED!");
-			},
-		error: function(err){
-			return err;
-			}
-		});
-}
-
-	document.getElementById("current-user").innerHTML = localStorage.getItem("username");
-
-    if (localStorage.getItem("new-account") == 1 && localStorage.getItem("current-bank") == 0){
-		$("#main-info").html("<h1>Welcome to Finance Manager! To start, please set your bank and cash totals.</h1><h2 class='main-prompt'>Bank Total: </h2><h2><input type='text' id='new-bank'></h2><br><h2 class='main-prompt'>Cash Total: </h2><h2><input type='text' id='new-cash'></h2><h2 class='main-prompt' id='submit-main'><button onclick='newAccount();'>Submit</button></h2>");
-	}
-	else if(localStorage.getItem("history")==0){
-		$("#main-info").html("<h1>Your bank and cash values have been set. Use the links above to navigate and use the features.</h1>");
-	}
-
-	$("#bank-total").html("<h3>Current Bank Total: $" + localStorage.getItem("current-bank") + "</h3>");
-	$("#cash-total").html("<h3> Current Cash Total: $" + localStorage.getItem("current-cash") + "</h3>");
-
-	$("#submit-main").click(function(){
-	var currentBank = $("#new-bank").val().trim();
-	var currentCash = $("#new-cash").val().trim();
-	localStorage.setItem("current-bank", currentBank);
-	localStorage.setItem("current-cash", currentCash);
-	$('#bank-total').load('./main.html', function() {});
-	$('#cash-total').load('./main.html', function() {});
-	// $("#bank-total", window.parent.document).load("./main.html", function(){});
-	// $("#cash-total", window.parent.document).load("./main.html", function(){});
-	// location.reload();
-
-	$("#main-info").html("<h1>Your bank and cash values have been set. Use the links above to navigate and use the features.</h1>");
-	});
+	$("#current-user").html(localStorage.getItem('username'));
 
 	$("#new-tr-btn").click(function(){
 		$('#main-info').html("");
 		$("#chart").html("");
 		$("#sort-area").html("");
+		localStorage.setItem("histSelect","");
 		$("#main-info").html("<br><div class='panel panel-default'>			<div class='panel-heading'><h1 id='new-tr-title'><strong>Add New Transaction</strong></h1></div><div class='panel-body'><h3>Type of Transaction:</h3><form><p><input type='radio' id='card-d' name='new-tr-1' value='cardD'> Card Deposit <input type='radio' id='card-w' name='new-tr-1' value='cardW'> Card Withdrawal <br><br><input type='radio' id='cash-d' name='new-tr-1' value='cashD'> Add Cash <input type='radio' id='cash-w' name='new-tr-1' value='cashW'> Subtract Cash </p></form><h3><button onclick='trNext();' id='tr-btn-1'>Next</button></h3>");
 	});
 
@@ -65,31 +15,74 @@ var events = {
 	"monthly": [
     {
       "id": 0,
-      "name": "This is a JSON event",
-      "startdate": "2017-01-10"
+      "name": "",
+      "startdate": "2017-01-01",
+      "color": "#FFB128"
     }
     ]
 };
-
-	$("#calendar-btn").click(function(){
+var cardWColor = "#2dc7ff";
+var cardDColor = "#2d7eff";
+var cashWColor = "#4cc956";
+var cashDColor = "#0e8210";
+color = "";
+	$("#calendar-btn").click(function(){ //START Calendar Button onclick
 		$("#chart").html("");
 		$("#sort-area").html("");
 		$('#main-info').html("");
+		localStorage.setItem("histSelect","");
 		$.get("/data", function(data){
+			var element = {};
 			var size = Object.keys(data).length;
 			var newDate = "";
-			for(i = 1; i < size; i++){
+			var newDateArr = [];
+			var months = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+			var date = "";
+			var label = "";
+			var count = 1;
+			for(i = 0; i < size; i++){ //BEGIN Calendar loop
+				var same = false;
 				newDate = data[i].date;
 				newDateArr = newDate.split(' ');
-				date = 
-				element = {"id":i, "name":data[i].description, "startdate": "2017-07-11"};
+				for(k = 0; k < months.length; k++){ //BEGIN MONTHS LOOP
+					if((newDateArr[0] == months[k]) && (k < 10)){
+						newDateArr[0] = "0" + k;
+					}
+					else if((newDateArr[0] == months[k])){
+						newDateArr[0] = "" + k;
+					}
+				} //END MONTHS LOOP
+				for(j = 1; j < 10; j++){ //BEGIN Days loop
+					if(newDateArr[1] == j){
+						newDateArr[1] == '0' + newDateArr[1];
+					}
+				} //END Days loop
+				if(data[i].cardOrCash == "Card Withdrawal"){
+					label = "Card--";
+					color = cardWColor;
+				}
+				else if(data[i].cardOrCash == "Card Deposit") {
+					label = "Card++";
+					color = cardDColor;
+				}
+				else if(data[i].cardOrCash == "Subtract Cash") {
+					label = "Cash--";
+					color = cashWColor;
+				}
+				else if(data[i].cardOrCash == "Add Cash") {
+					label = "Cash++";
+					color = cashDColor;
+				}
+				label += " " + data[i].description;
+				date = newDateArr[2] + '-' + newDateArr[0] + '-' + newDateArr[1];
+				element = {"id":i+1, "name":label, "startdate":date, "color":color};
 				events.monthly.push(element);
-			}
+			} //END Calendar loop
 			Calendar();
 		});
 		
         
-	});
+	}); //END Calendar Button onclick
 
 	function Calendar(){
 		$('#main-info').monthly({
@@ -99,14 +92,85 @@ var events = {
 		});
 	};
 
-	$("#history-btn").click(function(){
+localStorage.setItem("histSelect","");
+
+	$("#history-btn").click(function(){ //START History button
+		console.log("HS: "+localStorage.getItem("histSelect"));
 		$("#chart").html("");
 		$("#sort-area").html("");
-		localStorage.setItem("history",1)
-		location.reload();
-		// $('#main-info').html("<div='container'>       <div class='panel panel-default'>          <div class='panel-heading'><h1 id='new-tr-title'><strong>            Transaction History</strong></h1>          </div>          <div class='panel-body'>            <p>History goes here</p>          </div>        </div>      </div>");
-	});
-});
+		var all = "";
+		// localStorage.setItem("history",1)
+		// location.reload();
+		$.get("/data", function(data){ //GET START
+			var size = Object.keys(data).length;
+			var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var count = 0;
+            var appended = "";
+            var addAmount = "";
+           if(localStorage.getItem("histSelect") == "last30"){ //START IF 30 days selected
+			for(i = 0; i < 31; i++){ //START last 30 days loop
+				addAmount = "";
+            	count = 0;
+            	var day = new Date(new Date().setDate(new Date().getDate() - (i)));
+            	var dayFormat = monthNames[(day.getMonth())] + ' ' + day.getDate() + ' ' + (day.getYear()+ 1900);
+            	for(k = 0; k < size; k++){ //START History get loop
+            		if(dayFormat == data[k].date){
+            			if(count == 0){
+            				addAmount += "<u><p class='history-date'>" + dayFormat + " </p></u>";
+            				count++;
+            			}
+            			addAmount += "<p>" + data[k].cardOrCash + ": " + "$" + data[k].amount + " - " + data[k].description + "</p>"
+            		}
+				} //END History get loop
+				appended += addAmount;
+				all = "<div class='panel-body'><h4><u>Last 30 Days</u></h4>" + appended + "</div></div></div>";
+            } //END last 30 days loop
+        } //END IF 30 days selected
+        if(localStorage.getItem("histSelect") == "thisyearsofar"){ //START IF This Year selected
+        	var thisyeardays = new Date().getFullYear();
+        	var year = new Date().getFullYear();
+        	var month = new Date().getMonth();
+        	var day = new Date().getDate();
+        	thisyeardays = days_passed(new Date(year,month,day));
+        	console.log("FY: "+thisyeardays);
+			for(i = 0; i < thisyeardays; i++){ //START this year loop
+				addAmount = "";
+            	count = 0;
+            	var day = new Date(new Date().setDate(new Date().getDate() - (i)));
+            	var dayFormat = monthNames[(day.getMonth())] + ' ' + day.getDate() + ' ' + (day.getYear()+ 1900);
+            	for(k = 0; k < size; k++){ //START History get loop
+            		if(dayFormat == data[k].date){
+            			if(count == 0){
+            				addAmount += "<u><p class='history-date'>" + dayFormat + " </p></u>";
+            				count++;
+            			}
+            			addAmount += "<p>" + data[k].cardOrCash + ": " + "$" + data[k].amount + " - " + data[k].description + "</p>"
+            		}
+				} //END History get loop
+				appended += addAmount;
+				all = "<div class='panel-body'><h4><u>This Year So Far</u></h4>" + appended + "</div></div></div>";
+            } //END this year loop
+        } //END IF This Year selected
+			$('#main-info').html("<div='container'><div class='panel panel-default'><div class='panel-heading'><h1 id='new-tr-title'><strong>Transaction History</strong></h1></div><div class='panel-heading' id='hist-2'><div class='row'><div class='col-md-2'><h4><strong>Show: </strong></h4></div><div class='col-md-8'><input type='radio' id='last30' name='show-radio' value='last30'><strong> Last 30 Days <input type='radio' id='thisyearsofar' name='show-radio' value='thisyearsofar'> This Year So Far </strong></div><div class='col-md-2'><button onclick='historyGo();'><h4>Go!</h4></button></div></div></div>" + all);
+		}); //GET END
+		
+
+	}); //END History button
+}); //END DOC READY
+
+function days_passed(dt) {
+  var current = new Date(dt.getTime());
+  var previous = new Date(dt.getFullYear(), 0, 1);
+
+  return Math.ceil((current - previous + 1) / 86400000);
+}
+
+function historyGo(){
+		localStorage.setItem("histSelect",$('input[name=show-radio]:checked').val());
+		$("#main-info").html("");
+		$("#history-btn").click();
+	};
 
 function trNext(){
 	

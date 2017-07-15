@@ -21,9 +21,7 @@ var AccountSchema = new Schema({
     type: Number,
     default: 0
   }
-},
-{collection: 'accounts'}
-);
+});
 
 var Account = mongoose.model("Account", AccountSchema);
 

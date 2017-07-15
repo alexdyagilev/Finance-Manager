@@ -3,16 +3,18 @@ $(document).ready(function(){
 var dataArr = [];
 var yAxisData = [];
 var xAxisData = [];
+var graphCount = 1;
 
 $("#chart-start").click(function(){
-// console.log("CHART START FUNCTION");
+graphCount++;
 label = localStorage.getItem("label");
 // console.log("CHART START LABEL: "+label);
 $("#chart").html("<canvas id='myChart' width='400' height='140'></canvas>");
 //Chart Setup
+
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: graph,
     data: {
         labels: xAxisData,
         scaleOverride : true,   
@@ -62,6 +64,7 @@ $("#charts-btn").click(function(){
     console.log("----------------------");
     dataArr = [];
     $("#main-info").html("");
+    localStorage.setItem("histSelect","");
     //Sort area
     $("#sort-area").html("<div class='col-md-12' id='sorting'><div class='panel-body' id='sorting-area'><div class='col-md-2'><h1 id='sort-h1'>Sort by: </h1></div><div class='col-md-8'><form id='sorting-form'><p><input type='radio' id='s-total' name='sort-radio' value='Total Spent'> Total Spent <input type='radio' id='s-card-w' name='sort-radio' value='Card Withdrawals'> Card Withdrawals <input type='radio' id='s-card-d' name='sort-radio' value='Card Deposits'> Card Deposits <input type='radio' id='s-cash-w' name='sort-radio' value='Cash Spent'> Cash Spent <input type='radio' id='s-cash-d' name='sort-radio' value='Cash Added'> Cash Added </p><p>- OR - Spent on: <input type='radio' id='s-food' name='sort-radio' value='Food'> Food <input type='radio' id='s-ent' name='sort-radio' value='Entertainment'> Entertainment <input type='radio' id='s-bills' name='sort-radio' value='Bills'> Bills <input type='radio' id='s-gas' name='sort-radio' value='Gas'> Gas <input type='radio' id='s-other' name='sort-radio' value='Other'> Other </form></div><div class='col-md-2'><h1 id='sort-h1'><button id='sort-btn'>Go!</button></h1></div></div></div><script>$('#sort-btn').click(function(){    label = $('input[name=sort-radio]:checked').val(); localStorage.setItem('label',label); console.log('label change: '+label);    $('#chart-data').click();});</script>");
 }); //END CHART-BTN
@@ -80,7 +83,7 @@ for(i = 31; i > 0; i--){
     var day = new Date(new Date().setDate(new Date().getDate() - (i-1)));
     var dayFormat = monthNames[(day.getMonth())] + ' ' + day.getDate();
     xAxisData.push(dayFormat);
-};//Set up x-axis data STOP
+}//Set up x-axis data STOP
 
 $.get("/data", function(data){ //GET START
     
@@ -95,7 +98,7 @@ $.get("/data", function(data){ //GET START
             count = 0;
             addAmount = 0;
             var day = new Date(new Date().setDate(new Date().getDate() - (i-1)));
-            var dayFormat = monthNames[(day.getMonth())] + ' ' + day.getDate() + ' ' + day.getYear();
+            var dayFormat = monthNames[(day.getMonth())] + ' ' + day.getDate() + ' ' + (day.getYear()+ 1900);
             //2nd for loop for data (loops through transaction database)
             for(k = 0; k < size; k++){
                 //If Total Spent is selected
@@ -176,23 +179,13 @@ $.get("/data", function(data){ //GET START
                 dataArr.push(0);
             }
         };//END 1st for loop
-
-        
         
         for(i = 0; i < dataArr.length; i ++){
             yAxisData.push(dataArr[i]);
-            // console.log("ADDED");
             if(i == (dataArr.length-1)){
-                // console.log("CLICK CHART START!");
                 $("#chart-start").click();
-                // console.log("AFTER CLICK");
             }
         }
-        // console.log("LABEL: "+label);
-        // console.log("LABEL: "+localStorage.getItem("label"));
-        console.log("Y AXIS DATA: "+yAxisData);
-        console.log("Y AXIS LENGTH: "+yAxisData.length);
-        // console.log("---END DATA---")
     }); //GET STOP
 });//END CHART-DATA
 

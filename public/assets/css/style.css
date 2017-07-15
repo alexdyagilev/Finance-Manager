@@ -1,15 +1,33 @@
 
 h1 {
 	text-align: center;
-	background-color: green;
+	background-color: #00660b;
 	color: white;
 	border-style: solid;
 	border-width: 3px;
 	border-color: black;
 }
 
+h3 {
+	font-family: 'Lemonada', cursive;
+}
+
+#sort-h1, #sort-btn {
+	font-family: 'Rakkas', cursive;
+}
+
+.start-h1 {
+	background-color: #208c2b;
+	font-family: 'Exo 2', sans-serif;
+}
+
 p {
 	font-size: 16px;
+	font-family: 'PT Sans Caption', sans-serif;
+}
+
+.history-date{
+	text-align: left;
 }
 
 #sorting-form {
@@ -22,7 +40,7 @@ p {
 
 #sort-h1 {
 	display: inline;
-	background-color: green;
+	background-color: #00660b;
 	color: white;
 	border-style: none;
 	border-width: 0px;
@@ -31,13 +49,13 @@ p {
 
 #sort-btn {
 	background-color: white;
-	color: green;
+	color: #00660b;
 } 
 
 #sorting-area {
 
 	text-align: center;
-	background-color: green;
+	background-color: #00660b;
 	color: white;
 	border-style: solid;
 	border-width: 3px;
@@ -58,15 +76,22 @@ p {
 
 #new-tr-title {
 	text-align: center;
-	background-color: green;
+	background-color: #00660b;
 	color: white;
 	border-width: 0px;
+	font-family: 'Francois One', sans-serif;
 }
 
 .panel-heading {
-	background-color: green !important;
+	background-color: #00660b !important;
 	border-color: black !important;
 	border-width: 3px;
+}
+
+#hist-2{
+	background-color: #3ca852 !important;
+	border-color: black !important;
+	border-width: 1px;
 }
 
 .panel-body {
@@ -131,12 +156,47 @@ a {
 
 
 button {
-	background-color: green;
+	background-color: #00660b;
     color: white;
     border: none;
 }
 
+.main-btn-h1 {
+	font-family: 'Bree Serif', serif;
+}
+
+.main-btn-h1:hover {
+	background-color: #35ad81;
+}
+
+.main-btn {
+	background-color: #00660b;
+}
+
+.main-btn:hover {
+	background-color: #35ad81;
+}
+
+.main-btn:active {
+  background-color: #167251;
+  box-shadow: 0 5px #666;
+  transform: r;
+}
+
+.main-btn:after {
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
 .col-md-12 {
+	text-align: center;
+}
+
+.col-md-8 {
 	text-align: center;
 }
 
@@ -159,12 +219,19 @@ li {
 }
 
 .navbar {
-	background-color: green;
+	background-color: #00660b;
 	border-color: black !important;
 	height: 60px;
 }
 
 #current-user {
+	color: white;
+	font-family: 'Baloo', cursive;
+	text-align: center;
+	text-shadow: 5px 5px black;
+}
+
+.nav-right {
 	color: white;
 	font-family: 'Baloo', cursive;
 	text-align: center;
